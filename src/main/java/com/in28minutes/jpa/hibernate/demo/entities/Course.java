@@ -1,18 +1,32 @@
 package com.in28minutes.jpa.hibernate.demo.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-@Entity
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+
+
+//@NamedQuery(name = "query_get_all_courses", query = "select c from Course c")
+@NamedQueries(value = {@NamedQuery(name = "query_get_all_courses", query = "select c from Course c"),
+        @NamedQuery(name = "query_get_100_Step_courses", query = "select c from Course c where name like '%100 Steps'")})
 @Table(name = "Course")
+@Entity
 public class Course {
 
     @Id
     @GeneratedValue
     private Long id;
+
+    @Column(nullable = false)
     private String name;
+
+    @UpdateTimestamp
+    private LocalDateTime lastUpdatedDate;
+
+    @CreationTimestamp
+    private LocalDateTime createdDate;
 
     public Course() {
     }
@@ -31,6 +45,22 @@ public class Course {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public LocalDateTime getLastUpdatedDate() {
+        return lastUpdatedDate;
+    }
+
+    public void setLastUpdatedDate(LocalDateTime lastUpdatedDate) {
+        this.lastUpdatedDate = lastUpdatedDate;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
     }
 
     @Override

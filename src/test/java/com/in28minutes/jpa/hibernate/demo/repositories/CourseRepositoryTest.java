@@ -11,21 +11,37 @@ import org.springframework.test.annotation.DirtiesContext;
 @SpringBootTest(classes = DemoApplication.class)
 class CourseRepositoryTest {
 
-	@Autowired
-	CourseRepository courseRepository;
+    @Autowired
+    CourseRepository courseRepository;
 
-	@Test
-	void findByIdShouldGetACourse() {
-		Course course = courseRepository.findById(10001L);
-		Assertions.assertEquals("JPA in 10 Steps", course.getName());
-	}
+    @Test
+    void findByIdShouldGetACourse() {
+        Course course = courseRepository.findById(10001L);
+        Assertions.assertEquals("JPA in 10 Steps", course.getName());
+    }
 
-	// DirtiesContext will reset the data. It won't delete any data.
+    // DirtiesContext will reset the data. It won't change any data.
     @Test
     @DirtiesContext
     void deleteById_basic() {
         courseRepository.deleteById(10002L);
         Assertions.assertNull(courseRepository.findById(10002L));
+    }
+
+    @Test
+    @DirtiesContext
+    void save_basic() {
+        // cenario
+        Course course = courseRepository.findById(10001L);
+        Assertions.assertEquals("JPA in 10 Steps", course.getName());
+
+        // acao
+        course.setName("updated name");
+        courseRepository.save(course);
+
+        // verificacao
+        Course verifiedCourse = courseRepository.findById(10001L);
+        Assertions.assertEquals("updated name", verifiedCourse.getName());
     }
 
 }
