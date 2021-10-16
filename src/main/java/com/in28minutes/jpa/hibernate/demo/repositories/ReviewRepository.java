@@ -1,6 +1,6 @@
 package com.in28minutes.jpa.hibernate.demo.repositories;
 
-import com.in28minutes.jpa.hibernate.demo.entities.Course;
+import com.in28minutes.jpa.hibernate.demo.entities.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -9,26 +9,26 @@ import javax.transaction.Transactional;
 
 @Repository
 @Transactional
-public class CourseRepository {
+public class ReviewRepository {
 
     @Autowired
     EntityManager em;
 
-    public Course findById(Long id) {
-        return em.find(Course.class, id);
+    public Review findById(Long id) {
+        return em.find(Review.class, id);
     }
 
-    public Course save(Course course) {
-        if (course.getId() == null) {
-            em.persist(course);
+    public Review save(Review review) {
+        if (review.getId() == null) {
+            em.persist(review);
         } else {
-            em.merge(course);
+            em.merge(review);
         }
-        return course;
+        return review;
     }
 
     public void deleteById(Long id) {
-        Course course = findById(id);
-        em.remove(course);
+        Review review = findById(id);
+        em.remove(review);
     }
 }

@@ -31,5 +31,4 @@ public class CourseRepository {
         Course course = findById(id);
         em.remove(course);
     }
-
 }

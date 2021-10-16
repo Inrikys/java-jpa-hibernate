@@ -15,6 +15,10 @@ public class Review {
     @Column(nullable = false)
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
+
     public Review() {
     }
 
@@ -45,6 +49,10 @@ public class Review {
 
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public Course getCourse() {
+        return course;
     }
 
     @Override
