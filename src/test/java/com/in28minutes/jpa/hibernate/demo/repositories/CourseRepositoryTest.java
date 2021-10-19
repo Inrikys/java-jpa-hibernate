@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 @SpringBootTest(classes = DemoApplication.class)
@@ -21,6 +22,9 @@ class CourseRepositoryTest {
 
     @Autowired
     ReviewRepository reviewRepository;
+
+    @Autowired
+    EntityManager em;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -70,5 +74,20 @@ class CourseRepositoryTest {
         reviewRepository.save(review2);
         courseRepository.save(course);
     }
+
+    @Test
+    @Transactional
+    void retrieveReviewsForCourse() {
+        Course course = courseRepository.findById(10001L);
+        logger.info("course.getReviews() -> {}", course.getReviews());
+    }
+
+    @Test
+    @Transactional
+    void retrieveCourseForReview() {
+        Review review = em.find(Review.class, 50001L);
+        logger.info("course.getReviews() -> {}", review.getCourse());
+    }
+
 
 }

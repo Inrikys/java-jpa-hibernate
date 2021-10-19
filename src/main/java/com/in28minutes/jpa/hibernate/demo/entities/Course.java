@@ -23,8 +23,12 @@ public class Course {
     @Column(nullable = false)
     private String name;
 
+    // One part is normally lazy load (by default)
     @OneToMany(mappedBy = "course")
     private List<Review> reviews = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "courses")
+    private List<Student> students = new ArrayList<>();
 
     @UpdateTimestamp
     private LocalDateTime lastUpdatedDate;
@@ -69,6 +73,10 @@ public class Course {
 
     public List<Review> getReviews() {
         return reviews;
+    }
+
+    public List<Student> getStudents() {
+        return students;
     }
 
     @Override

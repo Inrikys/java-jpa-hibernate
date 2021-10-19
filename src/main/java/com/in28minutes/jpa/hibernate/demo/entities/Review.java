@@ -15,6 +15,7 @@ public class Review {
     @Column(nullable = false)
     private String description;
 
+    // Many part is normally eager (by default)
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
@@ -53,6 +54,10 @@ public class Review {
 
     public Course getCourse() {
         return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     @Override
