@@ -3,6 +3,7 @@ package com.in28minutes.jpa.hibernate.demo.repositories;
 import com.in28minutes.jpa.hibernate.demo.DemoApplication;
 import com.in28minutes.jpa.hibernate.demo.entities.Course;
 import com.in28minutes.jpa.hibernate.demo.entities.Review;
+import com.in28minutes.jpa.hibernate.demo.entities.Student;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -89,5 +90,12 @@ class CourseRepositoryTest {
         logger.info("course.getReviews() -> {}", review.getCourse());
     }
 
+    @Test
+    @Transactional
+    void retrieveCourseAndStudent() {
+        Course course = em.find(Course.class, 10001L);
+        logger.info("course -> {}", course);
+        logger.info("students -> {}", course.getStudents());
+    }
 
 }

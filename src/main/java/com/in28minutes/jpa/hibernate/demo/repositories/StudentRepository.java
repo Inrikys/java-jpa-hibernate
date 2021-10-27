@@ -1,5 +1,6 @@
 package com.in28minutes.jpa.hibernate.demo.repositories;
 
+import com.in28minutes.jpa.hibernate.demo.entities.Course;
 import com.in28minutes.jpa.hibernate.demo.entities.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -32,4 +33,9 @@ public class StudentRepository {
         em.remove(student);
     }
 
+    public void insertStudentAndCourse(Student student, Course course) {
+        student.getCourses().add(course);
+        em.persist(course);
+        em.persist(student);
+    }
 }

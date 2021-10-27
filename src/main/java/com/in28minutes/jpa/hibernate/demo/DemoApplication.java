@@ -2,7 +2,9 @@ package com.in28minutes.jpa.hibernate.demo;
 
 import com.in28minutes.jpa.hibernate.demo.entities.Course;
 import com.in28minutes.jpa.hibernate.demo.entities.Review;
+import com.in28minutes.jpa.hibernate.demo.entities.Student;
 import com.in28minutes.jpa.hibernate.demo.repositories.CourseRepository;
+import com.in28minutes.jpa.hibernate.demo.repositories.StudentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class DemoApplication implements CommandLineRunner {
 
     @Autowired
     private CourseRepository courseRepository;
+
+    @Autowired
+    private StudentRepository studentRepository;
 
     @Autowired
     private EntityManager em;
@@ -42,5 +47,6 @@ public class DemoApplication implements CommandLineRunner {
 
         courseRepository.addReviewsForCourse(course.getId(), reviews);
 
+        studentRepository.insertStudentAndCourse(new Student("Henrique"), new Course("Pringles"));
     }
 }
