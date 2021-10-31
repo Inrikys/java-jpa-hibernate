@@ -41,4 +41,11 @@ class JPQLTest {
         List<Course> courseList = query.getResultList();
         logger.info("Select c from Course c where name like %100 Steps -> {}", courseList);
     }
+
+    @Test
+    void shouldReturnCourseListWithoutStudentsFromJPQL() {
+        TypedQuery<Course> query = em.createQuery("Select c from Course c where c.students is empty", Course.class);
+        List<Course> courseList = query.getResultList();
+        logger.info("Select c from Course c  where c.students is empty -> {}", courseList);
+    }
 }

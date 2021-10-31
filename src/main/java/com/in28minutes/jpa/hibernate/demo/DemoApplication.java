@@ -39,21 +39,22 @@ public class DemoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Course course = courseRepository.save(new Course("Microservices 10 steps"));
+//        Course course = courseRepository.save(new Course("Microservices 10 steps"));
+//
+//        course.setName("updated name");
+//        courseRepository.save(course);
+//
+//        List<Review> reviews = new ArrayList<>();
+//        reviews.add(new Review("5", "Great Hands-on Stuff."));
+//        reviews.add(new Review("5", "Hatsoff."));
+//
+//        courseRepository.addReviewsForCourse(course.getId(), reviews);
+//        studentRepository.insertStudentAndCourse(new Student("Henrique"), new Course("Pringles"));
+//
+//        employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal(50)));
+//        employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal(10000)));
+//        logger.info("All Full Time Employees -> {}", employeeRepository.retrieveAllFullTimeEmployees());
+//        logger.info("All Part Time Employees -> {}", employeeRepository.retrieveAlPartTimeEmployees());
 
-        course.setName("updated name");
-        courseRepository.save(course);
-
-        List<Review> reviews = new ArrayList<>();
-        reviews.add(new Review("5", "Great Hands-on Stuff."));
-        reviews.add(new Review("5", "Hatsoff."));
-
-        courseRepository.addReviewsForCourse(course.getId(), reviews);
-        studentRepository.insertStudentAndCourse(new Student("Henrique"), new Course("Pringles"));
-
-        employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal(50)));
-        employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal(10000)));
-        logger.info("All Full Time Employees -> {}", employeeRepository.retrieveAllFullTimeEmployees());
-        logger.info("All Part Time Employees -> {}", employeeRepository.retrieveAlPartTimeEmployees());
     }
 }
