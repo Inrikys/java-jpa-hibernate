@@ -1,5 +1,7 @@
 package com.in28minutes.jpa.hibernate.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Table(name = "passport")
@@ -13,6 +15,7 @@ public class Passport {
     @Column(nullable = false)
     private String number;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
     @JoinColumn(name = "student_id")
     private Student student;

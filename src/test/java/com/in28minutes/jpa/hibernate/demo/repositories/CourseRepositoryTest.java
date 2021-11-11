@@ -35,6 +35,20 @@ class CourseRepositoryTest {
         Assertions.assertEquals("JPA in 10 Steps", course.getName());
     }
 
+    @Test
+    @Transactional
+    void findByIdShouldGetACourseFirstLevelCacheDemo() {
+        // the first level cache allows just one search into the database
+        // the data will be temporary stored on persistence context
+        // for it to be working, it needs to be in the same transaction
+        Course course = courseRepository.findById(10001L);
+        logger.info("course -> {}", course);
+
+        Course course1 = courseRepository.findById(10001L);
+        logger.info("course again -> {}", course1);
+        Assertions.assertEquals("JPA in 10 Steps", course.getName());
+    }
+
     // DirtiesContext will reset the data. It won't change any data.
     @Test
     @DirtiesContext
