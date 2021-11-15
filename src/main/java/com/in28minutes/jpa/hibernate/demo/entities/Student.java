@@ -22,9 +22,12 @@ public class Student {
     private Passport passport;
 
     @ManyToMany
-    @JoinTable(name = "student_course", joinColumns = @JoinColumn(name ="student_id"),
-            inverseJoinColumns = @JoinColumn(name="course_id"))
+    @JoinTable(name = "student_course", joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id"))
     private List<Course> courses = new ArrayList<>();
+
+    @Embedded
+    private Address address;
 
     public Student() {
     }
@@ -57,6 +60,14 @@ public class Student {
         return courses;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -64,4 +75,6 @@ public class Student {
                 ", name='" + name + '\'' +
                 '}';
     }
+
+
 }

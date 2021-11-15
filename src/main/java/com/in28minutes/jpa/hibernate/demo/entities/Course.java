@@ -19,6 +19,7 @@ import java.util.List;
 // soft delete, it replaces delete to the following query
 // @SQLDelete(sql="update course set is_deleted = true where id=?")
 // just retrieve where 'is_deleted = false' (to make soft delete works)
+// it doesn't work to native queries by default. It's required putting where is_delete...
 // @Where(clause="is_deleted = false")
 public class Course {
 
@@ -42,8 +43,13 @@ public class Course {
     @CreationTimestamp
     private LocalDateTime createdDate;
 
-
     private boolean isDeleted;
+
+    // Before execute delete query, it will execute this function before
+    @PreRemove
+    private void preRemove() {
+        this.isDeleted = true;
+    }
 
     public Course() {
     }
