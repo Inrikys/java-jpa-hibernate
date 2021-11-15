@@ -3,7 +3,6 @@ package com.in28minutes.jpa.hibernate.demo.repositories;
 import com.in28minutes.jpa.hibernate.demo.DemoApplication;
 import com.in28minutes.jpa.hibernate.demo.entities.Course;
 import com.in28minutes.jpa.hibernate.demo.entities.Review;
-import com.in28minutes.jpa.hibernate.demo.entities.Student;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -39,7 +38,7 @@ class CourseRepositoryTest {
     @Transactional
     void findByIdShouldGetACourseFirstLevelCacheDemo() {
         // the first level cache allows just one search into the database
-        // the data will be temporary stored on persistence context
+        // the data will be temporarily stored in the persistence context
         // for it to be working, it needs to be in the same transaction
         Course course = courseRepository.findById(10001L);
         logger.info("course -> {}", course);

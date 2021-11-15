@@ -1,7 +1,9 @@
 package com.in28minutes.jpa.hibernate.demo.entities;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,6 +16,10 @@ import java.util.List;
         @NamedQuery(name = "query_get_100_Step_courses", query = "select c from Course c where name like '%100 Steps'")})
 @Table(name = "course")
 @Entity
+// soft delete, it replaces delete to the following query
+// @SQLDelete(sql="update course set is_deleted = true where id=?")
+// just retrieve where 'is_deleted = false' (to make soft delete works)
+// @Where(clause="is_deleted = false")
 public class Course {
 
     @Id
@@ -35,6 +41,9 @@ public class Course {
 
     @CreationTimestamp
     private LocalDateTime createdDate;
+
+
+    private boolean isDeleted;
 
     public Course() {
     }
